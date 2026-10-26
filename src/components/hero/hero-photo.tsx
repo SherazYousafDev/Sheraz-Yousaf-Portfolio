@@ -40,7 +40,7 @@ export function HeroPhoto({ className }: { className?: string }) {
   const handleReady = useCallback(() => setGlReady(true), []);
 
   return (
-    <div ref={box} className={`relative aspect-[422/591] ${className ?? ""}`} data-cursor="Touch">
+    <div ref={box} className={`relative aspect-[422/591] ${className ?? ""}`}>
       <Image
         src={person.photo.src}
         alt={person.photo.alt}

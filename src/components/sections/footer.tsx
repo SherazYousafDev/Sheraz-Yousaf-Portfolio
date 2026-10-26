@@ -111,7 +111,7 @@ export function Footer() {
               Local <LocalTime seconds /> PKT
             </span>
             <span className="col-span-2 text-left md:col-span-1 md:text-right">
-              <a href={`mailto:${person.email}`} data-cursor="Email" className="link-draw normal-case">
+              <a href={`mailto:${person.email}`} className="link-draw normal-case">
                 {person.email}
               </a>
             </span>
@@ -121,7 +121,7 @@ export function Footer() {
             <ul className="label flex flex-wrap gap-x-6 gap-y-2">
               {socials.map((s) => (
                 <li key={s.href}>
-                  <a href={s.href} target="_blank" rel="noreferrer" data-cursor="Open" className="link-draw">
+                  <a href={s.href} target="_blank" rel="noreferrer" className="link-draw">
                     <ScrambleText>{s.label}</ScrambleText> ↗
                   </a>
                 </li>
@@ -131,7 +131,6 @@ export function Footer() {
               <button
                 type="button"
                 onClick={() => scrollTo(0)}
-                data-cursor="Top"
                 className="label group/top flex items-center gap-3 rounded-full border border-[#141312] px-5 py-3 transition-colors duration-500 hover:bg-[#141312] hover:text-[var(--c-accent-bg)]"
               >
                 <ScrambleText>Back to top</ScrambleText>

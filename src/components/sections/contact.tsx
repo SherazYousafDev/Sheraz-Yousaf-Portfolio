@@ -93,7 +93,7 @@ export function Contact() {
       <div data-cta className="flex flex-1 flex-col justify-center py-[8vh]">
         <p className="label mb-6 opacity-60">(Hiring a data analyst — or need a site built?)</p>
         <Magnetic strength={0.12} className="w-fit">
-          <a href={`mailto:${person.email}`} data-cursor="Email" className="group/cta block w-fit" aria-label={`Let's talk — email ${person.email}`}>
+          <a href={`mailto:${person.email}`} className="group/cta block w-fit" aria-label={`Let's talk — email ${person.email}`}>
             <h2 id="contact-title" aria-hidden className="display text-[22vw] uppercase leading-[0.82] md:text-[min(15vw,30svh)]">
               <span data-cta-line className="block">
                 Let’s
@@ -116,7 +116,6 @@ export function Contact() {
           <button
             type="button"
             onClick={onCopy}
-            data-cursor="Copy"
             className="group/e flex w-fit items-baseline gap-4 text-left"
             aria-label={`Copy email address ${person.email}`}
           >
@@ -138,7 +137,7 @@ export function Contact() {
           <ul className="flex flex-col gap-2">
             {socials.map((s) => (
               <li key={s.href}>
-                <a href={s.href} target="_blank" rel="noreferrer" data-cursor="Open" className="link-draw text-[16px] md:text-[18px]">
+                <a href={s.href} target="_blank" rel="noreferrer" className="link-draw text-[16px] md:text-[18px]">
                   {s.label} ↗
                 </a>
               </li>
@@ -149,7 +148,7 @@ export function Contact() {
         <div data-contact-row className="col-span-2 flex flex-col items-start md:col-span-3 md:col-start-10">
           <p className="label mb-3 opacity-60">Résumé</p>
           <Magnetic strength={0.3}>
-            <WipeButton href={person.resume} download="Sheraz-Yousaf-Resume.pdf" data-cursor="Download" className="label px-5 py-3.5">
+            <WipeButton href={person.resume} download="Sheraz-Yousaf-Resume.pdf" className="label px-5 py-3.5">
               <ScrambleText>Download PDF</ScrambleText> ↓
             </WipeButton>
           </Magnetic>

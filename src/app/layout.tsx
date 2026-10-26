@@ -9,7 +9,6 @@ import { GridLines } from "@/components/layout/grid-lines";
 import { Rail } from "@/components/layout/rail";
 import { Navbar } from "@/components/layout/navbar";
 import { ScrollProgress } from "@/components/layout/scroll-progress";
-import { Cursor } from "@/components/layout/cursor";
 import { EasterEgg } from "@/components/layout/easter-egg";
 import { Preloader } from "@/components/sections/preloader";
 import { person, site } from "@/data/portfolio";
@@ -104,7 +103,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
           <Grain />
           <EasterEgg />
-          <Cursor />
         </ThemeProvider>
       </body>
     </html>

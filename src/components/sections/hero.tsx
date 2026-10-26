@@ -315,7 +315,6 @@ export function Hero() {
                 scrollTo("#about");
               }}
               className="group ml-auto inline-flex items-center gap-3"
-              data-cursor="Scroll"
             >
               <span className="link-draw">Scroll to audit</span>
               <span className="relative block h-8 w-px overflow-hidden bg-line">

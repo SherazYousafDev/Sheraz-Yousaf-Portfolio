@@ -259,7 +259,6 @@ export function Work() {
                   <a
                     href={`#work-${slug(p)}`}
                     data-index-row
-                    data-cursor="View"
                     className="group/r grid grid-cols-[36px_1fr_auto] items-baseline gap-3 border-b border-line py-3.5 lg:py-[1.6svh]"
                   >
                     <span className="label text-accent">{pad(i + 1)}</span>
@@ -296,7 +295,6 @@ export function Work() {
                       target="_blank"
                       rel="noreferrer"
                       data-frame-link
-                      data-cursor="Open"
                       aria-label={`Open ${p.name} (${p.linkLabel}) in a new tab`}
                       className="group/f block"
                     >
@@ -349,7 +347,6 @@ export function Work() {
                       href={p.href}
                       target="_blank"
                       rel="noreferrer"
-                      data-cursor="Open"
                       className="label group/l mt-5 inline-flex w-fit items-center gap-3 rounded-full border border-[var(--fg)] px-5 py-3 transition-colors duration-500 hover:bg-[var(--fg)] hover:text-[var(--bg)]"
                     >
                       <ScrambleText>{`Visit ${p.linkLabel}`}</ScrambleText>

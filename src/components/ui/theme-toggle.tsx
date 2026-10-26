@@ -66,7 +66,6 @@ export function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={toggle}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      data-cursor="Switch"
       className={`group relative grid size-9 place-items-center rounded-full border border-line ${className ?? ""}`}
     >
       <span className="relative block size-3.5 overflow-hidden rounded-full border border-current">
