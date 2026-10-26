@@ -82,7 +82,7 @@ export function Contact() {
       className="relative flex min-h-svh flex-col px-gutter pb-16 pt-[16vh] lg:pl-[calc(var(--gutter)+var(--rail))]"
     >
       <div className="label grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:grid-cols-12">
-        <span className="col-span-2 whitespace-nowrap">SY-07 / {pad(chapters.length)}</span>
+        <span className="col-span-2 whitespace-nowrap">SY-08 / {pad(chapters.length)}</span>
         <span className="hidden md:col-span-3 md:col-start-3 md:block">(Contact) — open the ticket</span>
         <span className="col-span-2 col-start-3 inline-flex items-center justify-end gap-2 md:col-span-3 md:col-start-10">
           <StatusDot /> {person.availabilityLabel}

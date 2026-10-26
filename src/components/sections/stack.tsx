@@ -48,7 +48,7 @@ export function Stack() {
     >
       <div className="px-gutter lg:pl-[calc(var(--gutter)+var(--rail))]">
         <div className="label grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:grid-cols-12">
-          <span className="col-span-2 whitespace-nowrap">SY-05 / {pad(chapters.length)}</span>
+          <span className="col-span-2 whitespace-nowrap">SY-06 / {pad(chapters.length)}</span>
           <span className="hidden md:col-span-3 md:col-start-3 md:block">(Stack) — tools of the trade</span>
           <span className="col-span-2 col-start-3 whitespace-nowrap text-right md:col-span-3 md:col-start-10">
             {total} entries<span className="hidden sm:inline"> · {skills.groups.length} groups</span>

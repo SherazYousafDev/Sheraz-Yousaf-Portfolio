@@ -57,7 +57,7 @@ export function Education() {
       className="relative px-gutter pb-[16vh] pt-[18vh] lg:pl-[calc(var(--gutter)+var(--rail))]"
     >
       <div className="label grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:grid-cols-12">
-        <span className="col-span-2 whitespace-nowrap">SY-06 / {pad(chapters.length)}</span>
+        <span className="col-span-2 whitespace-nowrap">SY-07 / {pad(chapters.length)}</span>
         <span className="hidden md:col-span-3 md:col-start-3 md:block">(Education) — the transcript</span>
         <span className="col-span-2 col-start-3 text-right md:col-span-3 md:col-start-10">
           {education.length} degrees · {certifications.length} certificates

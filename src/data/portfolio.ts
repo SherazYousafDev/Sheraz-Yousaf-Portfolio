@@ -41,6 +41,7 @@ export const nav = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Work", href: "#work" },
+  { label: "Playground", href: "#playground" },
   { label: "Stack", href: "#stack" },
   { label: "Contact", href: "#contact" },
 ];
@@ -198,6 +199,60 @@ export const projects: Project[] = [
   },
 ];
 
+export type Experiment = {
+  /** File label carried over from the old portfolio's playground. */
+  file: string;
+  name: string;
+  stack: string[];
+  blurb: string;
+  href?: string;
+  image?: string;
+};
+
+/** "My Playground" — side experiments, taken from the old portfolio and GitHub. */
+export const playground: Experiment[] = [
+  {
+    file: "RAW_FILE_V01",
+    name: "MacOS Portfolio",
+    stack: ["React", "Tailwind CSS"],
+    blurb: "A personal portfolio inspired by the polish and smoothness of macOS — clean, responsive React + Tailwind interfaces.",
+    href: "https://sheraz-yousaf1.netlify.app/",
+    image: "/images/playground/macos-portfolio.webp",
+  },
+  {
+    file: "RAW_FILE_V02",
+    name: "SkillSwap",
+    stack: ["React", "Tailwind CSS", "Supabase"],
+    // TODO: add a one-line description and the live link for SkillSwap.
+    blurb: "A React + Tailwind app backed by Supabase. Live link coming soon.",
+  },
+  {
+    file: "RAW_FILE_V03",
+    name: "Pulse.Media",
+    stack: ["React", "Supabase"],
+    // TODO: add a one-line description and the live link for Pulse.Media.
+    blurb: "A React app with a Supabase backend. Live link coming soon.",
+  },
+  {
+    file: "RAW_FILE_V04",
+    name: "TuneHub",
+    stack: ["JavaScript", "HTML", "CSS"],
+    blurb: "A sleek web-based music player with playlists, a responsive layout and smooth UI animations.",
+    href: "https://sherazyousafdev.github.io/TuneHub/",
+    image: "/images/playground/tunehub.webp",
+  },
+  {
+    file: "RAW_FILE_V05",
+    name: "Code Editor",
+    stack: ["HTML", "CSS", "JavaScript"],
+    blurb: "Write and test HTML, CSS and JavaScript in the browser with an instant live preview.",
+    href: "https://sherazyousafdev.github.io/Code-Editor/",
+    image: "/images/playground/code-editor.webp",
+  },
+];
+
+export const githubProfile = "https://github.com/SherazYousafDev";
+
 export const skills = {
   marqueeTop: ["Excel", "Google Sheets", "SQL", "WooCommerce", "TireGuru", "Data Validation", "Data Cleaning"],
   marqueeBottom: ["React", "JavaScript", "Tailwind CSS", "HTML", "CSS", "Git", "Supabase", "Netlify", "Bootstrap"],
@@ -238,6 +293,7 @@ export const chapters = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
   { id: "work", label: "Selected Work" },
+  { id: "playground", label: "Playground" },
   { id: "stack", label: "Stack" },
   { id: "education", label: "Education" },
   { id: "contact", label: "Contact" },
