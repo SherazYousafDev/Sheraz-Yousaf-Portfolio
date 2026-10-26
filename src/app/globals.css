@@ -215,4 +215,5 @@ html[data-chapter="accent"] .ui { --fg: var(--c-accent-fg); --bg: var(--c-accent
 html .ui[data-menu-open] { --fg: var(--c-ink-fg); --bg: var(--c-ink-bg); }
 
 /* The darkroom vignette only belongs on dark plates — hide it on the bone chapter. */
-html[data-chapter="ink"] [data-vignette] { opacity: 0 !important; }
+html[data-chapter="ink"] [data-vignette],
+html[data-chapter="accent"] [data-vignette] { opacity: 0 !important; }
