@@ -4,13 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { gsap } from "@/lib/gsap";
 import { scrollState, scrollTo } from "@/lib/scroll-state";
-import { nav, person, socials } from "@/data/portfolio";
+import { chapters, nav, person, socials } from "@/data/portfolio";
 import { ScrambleText } from "@/components/ui/scramble-text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LocalTime } from "@/components/ui/local-time";
 import { StatusDot } from "@/components/ui/status-dot";
 
 const pad = (n: number) => String(n).padStart(2, "0");
+/** Nav numbers match the section's chapter number (SY-0X), even when chapters are skipped. */
+const numberOf = (href: string) => pad(chapters.findIndex((c) => `#${c.id}` === href) + 1);
 const curtain = [0.76, 0, 0.24, 1] as const;
 
 export function Navbar() {
@@ -81,10 +83,10 @@ export function Navbar() {
 
           <nav aria-label="Primary" className="hidden lg:block">
             <ul className="flex items-center gap-8">
-              {nav.map((item, i) => (
+              {nav.map((item) => (
                 <li key={item.href}>
                   <a href={item.href} onClick={go(item.href)} className="label link-draw flex gap-1.5 py-2">
-                    <span className="opacity-50">{pad(i + 2)}</span>
+                    <span className="opacity-50">{numberOf(item.href)}</span>
                     <ScrambleText>{item.label}</ScrambleText>
                   </a>
                 </li>
@@ -125,7 +127,7 @@ export function Navbar() {
             role="dialog"
             aria-modal="true"
             aria-label="Menu"
-            data-chapter="ink"
+            data-chapter-lock="ink"
             className="fixed inset-0 z-[79] flex flex-col bg-[var(--c-ink-bg)] px-gutter pb-8 pt-24 lg:hidden"
             initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
             animate={{ clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 0.9, ease: curtain } }}
@@ -146,7 +148,7 @@ export function Navbar() {
                     <span className="display text-[13vw] leading-[0.95] sm:text-[10vw]">
                       {item.label === "Contact" ? <span className="serif-i">{item.label}</span> : item.label}
                     </span>
-                    <span className="label opacity-60">{pad(i + 2)}</span>
+                    <span className="label opacity-60">{numberOf(item.href)}</span>
                   </motion.a>
                 </li>
               ))}

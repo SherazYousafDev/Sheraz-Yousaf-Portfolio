@@ -3,7 +3,8 @@ import { About } from "@/components/sections/about";
 import { Experience } from "@/components/sections/experience";
 import { Work } from "@/components/sections/work";
 import { Stack } from "@/components/sections/stack";
-import { Placeholder } from "@/components/sections/placeholder";
+import { Education } from "@/components/sections/education";
+import { Contact } from "@/components/sections/contact";
 
 export default function Home() {
   return (
@@ -13,8 +14,8 @@ export default function Home() {
       <Experience />
       <Work />
       <Stack />
-      <Placeholder id="education" chapter="paper" />
-      <Placeholder id="contact" chapter="ink" />
+      <Education />
+      <Contact />
     </main>
   );
 }

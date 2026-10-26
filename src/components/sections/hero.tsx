@@ -232,6 +232,7 @@ export function Hero() {
       id="hero"
       ref={section}
       data-chapter="paper"
+      data-chapter-lock="paper"
       aria-label="Introduction"
       className="relative h-svh min-h-[620px] overflow-hidden"
     >

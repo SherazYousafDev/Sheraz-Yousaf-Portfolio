@@ -51,10 +51,21 @@
   color-scheme: dark;
 }
 
-[data-chapter="paper"] { --bg: var(--c-paper-bg); --fg: var(--c-paper-fg); }
-[data-chapter="ink"] { --bg: var(--c-ink-bg); --fg: var(--c-ink-fg); }
-[data-chapter="accent"] { --bg: var(--c-accent-bg); --fg: var(--c-accent-fg); }
-[data-chapter] { color: var(--fg); --line: color-mix(in oklab, var(--fg) 14%, transparent); }
+/* Text colour follows the chapter under the viewport (set on <html> by
+   ChapterBackdrop) and morphs with the backdrop, so a section that is still
+   on screen during a hand-off never ends up dark-on-dark.
+   Registered so the colours can transition smoothly. */
+@property --fg { syntax: "<color>"; inherits: true; initial-value: #141312; }
+@property --bg { syntax: "<color>"; inherits: true; initial-value: #eeebe4; }
+
+html, html[data-chapter="paper"] { --bg: var(--c-paper-bg); --fg: var(--c-paper-fg); }
+html[data-chapter="ink"] { --bg: var(--c-ink-bg); --fg: var(--c-ink-fg); }
+html[data-chapter="accent"] { --bg: var(--c-accent-bg); --fg: var(--c-accent-fg); }
+
+/* Locked palettes for elements that must not follow the page (hero zoom, mobile menu). */
+[data-chapter-lock="paper"] { --bg: var(--c-paper-bg); --fg: var(--c-paper-fg); }
+[data-chapter-lock="ink"] { --bg: var(--c-ink-bg); --fg: var(--c-ink-fg); }
+[data-chapter-lock] { color: var(--fg); --line: color-mix(in oklab, var(--fg) 14%, transparent); }
 
 @theme inline {
   --color-paper: var(--paper);
@@ -77,11 +88,10 @@
 
 /* ───────────────────────── Base ───────────────────────── */
 html {
-  --bg: var(--c-paper-bg);
-  --fg: var(--c-paper-fg);
   --line: color-mix(in oklab, var(--fg) 14%, transparent);
   background: var(--c-paper-bg);
-  color: var(--c-paper-fg);
+  color: var(--fg);
+  transition: --fg 0.9s var(--ease-curtain), --bg 0.9s var(--ease-curtain);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -202,16 +212,8 @@ html.seen [data-preloader] { display: none; }
   100% { transform: scaleY(0); transform-origin: bottom; }
 }
 
-/* Fixed UI (nav, rail) recolours to the chapter under the viewport. */
-.ui {
-  --fg: var(--c-paper-fg);
-  --bg: var(--c-paper-bg);
-  color: var(--fg);
-  transition: color 0.7s var(--ease-curtain);
-}
-html[data-chapter="ink"] .ui { --fg: var(--c-ink-fg); --bg: var(--c-ink-bg); }
-html[data-chapter="accent"] .ui { --fg: var(--c-accent-fg); --bg: var(--c-accent-bg); }
-.ui { --line: color-mix(in oklab, var(--fg) 18%, transparent); }
+/* Fixed UI (nav, rail) inherits the page chapter; slightly stronger rules. */
+.ui { color: var(--fg); --line: color-mix(in oklab, var(--fg) 18%, transparent); }
 html .ui[data-menu-open] { --fg: var(--c-ink-fg); --bg: var(--c-ink-bg); }
 
 /* The darkroom vignette only belongs on dark plates — hide it on the bone chapter. */
