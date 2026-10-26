@@ -13,9 +13,9 @@ export function OpenBadge({ className }: { className?: string }) {
         e.preventDefault();
         scrollTo("#contact");
       }}
-      aria-label="Open to work, get in touch"
       className={`group grid aspect-square place-items-center rounded-full bg-[var(--c-paper-fg)] text-[var(--c-paper-bg)] ${className ?? ""}`}
     >
+      <span className="sr-only">{TEXT.replaceAll("✳", ",")} get in touch</span>
       <svg viewBox="0 0 100 100" aria-hidden className="col-start-1 row-start-1 size-full motion-safe:animate-[spin_14s_linear_infinite] group-hover:[animation-duration:4s]">
         <defs>
           <path id="badge-circle" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0" />

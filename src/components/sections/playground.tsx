@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import { playInView } from "@/lib/in-view";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { chapters, githubProfile, playground, type Experiment } from "@/data/portfolio";
 import { ScrambleText } from "@/components/ui/scramble-text";
@@ -23,7 +24,9 @@ function CardBody({ card, index }: { card: Card; index: number }) {
         </span>
         <span className="label flex items-center justify-between">
           <ScrambleText>github.com/SherazYousafDev</ScrambleText>
-          <span aria-hidden className="text-[20px]">↗</span>
+          <span aria-hidden className="text-[20px]">
+            ↗
+          </span>
         </span>
       </div>
     );
@@ -41,7 +44,9 @@ function CardBody({ card, index }: { card: Card; index: number }) {
           />
         ) : (
           // Alternate poster colours so neighbouring "coming soon" cards never look identical.
-          <div className={`absolute inset-0 flex items-end p-5 ${index % 2 ? "bg-accent text-[#141312]" : "bg-[var(--fg)] text-[var(--bg)]"}`}>
+          <div
+            className={`absolute inset-0 flex items-end p-5 ${index % 2 ? "bg-accent text-[#141312]" : "bg-[var(--fg)] text-[var(--bg)]"}`}
+          >
             <span className="display text-[clamp(36px,3.6vw,60px)] leading-[0.85]">{card.name}</span>
             <span className="label absolute right-5 top-5">WIP</span>
           </div>
@@ -103,26 +108,30 @@ export function Playground() {
       if (reduced) return () => cleanups.forEach((c) => c());
 
       // ── Title letters drop in, one by one.
-      gsap.from(q("[data-pg-char]"), {
-        yPercent: -110,
-        rotate: (i: number) => (i % 2 ? 8 : -8),
-        duration: 1.2,
-        ease: "back.out(1.7)",
-        stagger: 0.04,
-        scrollTrigger: { trigger: q("[data-pg-title]")[0], start: "top 85%", once: true },
-      });
+      playInView(
+        gsap.from(q("[data-pg-char]"), {
+          yPercent: -110,
+          rotate: (i: number) => (i % 2 ? 8 : -8),
+          duration: 1.2,
+          ease: "back.out(1.7)",
+          stagger: 0.04,
+        }),
+        q("[data-pg-title]")[0],
+        "top 85%",
+      );
 
       // ── Cards rise in with a slight spin, in reading order.
       (q("[data-pg-card]") as HTMLElement[]).forEach((card) => {
-        gsap.from(card, {
-          y: 120,
-          rotate: Number(card.dataset.spin ?? 0),
-          scale: 0.9,
-          opacity: 0,
-          duration: 1.3,
-          ease: "expo.out",
-          scrollTrigger: { trigger: card, start: "top 92%", once: true },
-        });
+        // Explicit end values: never let the tween read a mid-transition style as its target.
+        playInView(
+          gsap.fromTo(
+            card,
+            { y: 120, rotate: Number(card.dataset.spin ?? 0), scale: 0.9, opacity: 0 },
+            { y: 0, rotate: 0, scale: 1, opacity: 1, duration: 1.3, ease: "expo.out" },
+          ),
+          card,
+          "top 92%",
+        );
       });
 
       // ── Desktop: the three columns drift at different speeds (parallax).
@@ -132,7 +141,11 @@ export function Playground() {
           gsap.fromTo(
             col,
             { y: [60, 160, 20][i] },
-            { y: [-60, -120, -20][i], ease: "none", scrollTrigger: { trigger: q("[data-pg-grid]")[0], start: "top bottom", end: "bottom top", scrub: 0.6 } },
+            {
+              y: [-60, -120, -20][i],
+              ease: "none",
+              scrollTrigger: { trigger: q("[data-pg-grid]")[0], start: "top bottom", end: "bottom top", scrub: 0.6 },
+            },
           );
         });
       });
@@ -164,7 +177,11 @@ export function Playground() {
       <div className="grid grid-cols-4 items-end gap-x-4 pt-[5vh] md:grid-cols-12">
         <h2 id="playground-title" data-pg-title data-velocity className="display col-span-4 md:col-span-8">
           <span className="block text-[8vw] uppercase leading-none md:text-[min(3.2vw,6svh)]">My</span>
-          <span aria-label={title} className="serif-i flex overflow-hidden pb-[0.08em] text-[22vw] leading-[0.9] text-accent md:text-[min(13vw,26svh)]">
+          <span className="sr-only">{title}</span>
+          <span
+            aria-hidden
+            className="serif-i flex overflow-hidden pb-[0.08em] text-[22vw] leading-[0.9] text-accent md:text-[min(13vw,26svh)]"
+          >
             {title.split("").map((ch, i) => (
               <span key={i} aria-hidden data-pg-char className="inline-block">
                 {ch}
@@ -199,14 +216,9 @@ export function Playground() {
                   style={{ order: index }}
                 >
                   {href ? (
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="block"
-                      aria-label={card.kind === "more" ? "Explore all experiments on GitHub" : `Open ${card.name} in a new tab`}
-                    >
+                    <a href={href} target="_blank" rel="noreferrer" className="block">
                       {inner}
+                      <span className="sr-only"> (opens in a new tab)</span>
                     </a>
                   ) : (
                     <div tabIndex={0} className="block outline-none focus-visible:outline-2">

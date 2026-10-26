@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { playInView } from "@/lib/in-view";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import { chapters, person, socials } from "@/data/portfolio";
 import { Magnetic } from "@/components/ui/magnetic";
@@ -50,25 +51,32 @@ export function Contact() {
       SplitText.create(q("[data-cta-line]"), {
         type: "chars",
         mask: "chars",
+        aria: "none",
         autoSplit: true,
         onSplit: (self) =>
-          gsap.from(self.chars, {
-            yPercent: 115,
-            duration: 1.4,
-            ease: "expo.out",
-            stagger: { each: 0.035, from: "center" },
-            scrollTrigger: { trigger: q("[data-cta]")[0], start: "top 80%", once: true },
-          }),
+          playInView(
+            gsap.from(self.chars, {
+              yPercent: 115,
+              duration: 1.4,
+              ease: "expo.out",
+              stagger: { each: 0.035, from: "center" },
+            }),
+            q("[data-cta]")[0],
+            "top 80%",
+          ),
       });
 
-      gsap.from(q("[data-contact-row]"), {
-        y: 30,
-        opacity: 0,
-        duration: 1.1,
-        ease: "expo.out",
-        stagger: 0.07,
-        scrollTrigger: { trigger: q("[data-contact-grid]")[0], start: "top 88%", once: true },
-      });
+      playInView(
+        gsap.from(q("[data-contact-row]"), {
+          y: 30,
+          opacity: 0,
+          duration: 1.1,
+          ease: "expo.out",
+          stagger: 0.07,
+        }),
+        q("[data-contact-grid]")[0],
+        "top 88%",
+      );
     },
     { scope: section },
   );
@@ -93,18 +101,25 @@ export function Contact() {
       <div data-cta className="flex flex-1 flex-col justify-center py-[8vh]">
         <p className="label mb-6 opacity-60">(Hiring a data analyst, or need a site built?)</p>
         <Magnetic strength={0.12} className="w-fit">
-          <a href={`mailto:${person.email}`} className="group/cta block w-fit" aria-label={`Let's talk, email ${person.email}`}>
-            <h2 id="contact-title" aria-hidden className="display text-[22vw] uppercase leading-[0.82] md:text-[min(15vw,30svh)]">
+          <a href={`mailto:${person.email}`} className="group/cta block w-fit">
+            <h2 id="contact-title" className="display text-[22vw] uppercase leading-[0.82] md:text-[min(15vw,30svh)]">
               <span data-cta-line className="block">
                 Let’s
               </span>
-              <span data-cta-line className="serif-i block pl-[0.5em] normal-case text-accent transition-transform duration-700 ease-[var(--ease-expo)] group-hover/cta:translate-x-[0.12em]">
+              <span
+                data-cta-line
+                className="serif-i block pl-[0.5em] normal-case text-accent transition-transform duration-700 ease-[var(--ease-expo)] group-hover/cta:translate-x-[0.12em]"
+              >
                 talk
-                <span aria-hidden className="ml-[0.08em] inline-block text-[0.4em] align-top transition-transform duration-700 ease-[var(--ease-expo)] group-hover/cta:-translate-y-[0.15em] group-hover/cta:translate-x-[0.15em]">
+                <span
+                  aria-hidden
+                  className="ml-[0.08em] inline-block text-[0.4em] align-top transition-transform duration-700 ease-[var(--ease-expo)] group-hover/cta:-translate-y-[0.15em] group-hover/cta:translate-x-[0.15em]"
+                >
                   ↗
                 </span>
               </span>
             </h2>
+            <span className="sr-only">, email {person.email}</span>
           </a>
         </Magnetic>
       </div>

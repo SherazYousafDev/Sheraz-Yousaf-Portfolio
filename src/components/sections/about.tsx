@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useRef } from "react";
+import { playInView } from "@/lib/in-view";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { about, chapters, person } from "@/data/portfolio";
 import { RevealText } from "@/components/ui/reveal-text";
@@ -83,26 +84,33 @@ export function About() {
       ).to({}, { duration: 0.8 });
 
       // ── Spec sheet: rules draw left → right, then each value wipes in like a highlighter.
-      gsap.timeline({ scrollTrigger: { trigger: q("[data-facts]")[0], start: "top 80%", once: true } })
-        .to(q("[data-rule]"), { scaleX: 1, duration: 1.2, ease: "curtain", stagger: 0.08 })
-        .fromTo(
-          q("[data-fact]"),
-          { clipPath: "inset(0% 100% 0% 0%)" },
-          { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: "expo.out", stagger: 0.08 },
-          0.25,
-        );
+      playInView(
+        gsap
+          .timeline()
+          .to(q("[data-rule]"), { scaleX: 1, duration: 1.2, ease: "curtain", stagger: 0.08 })
+          .fromTo(
+            q("[data-fact]"),
+            { clipPath: "inset(0% 100% 0% 0%)" },
+            { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: "expo.out", stagger: 0.08 },
+            0.25,
+          ),
+        q("[data-facts]")[0],
+        "top 80%",
+      );
 
       // ── Method numbers flip up into place.
       q("[data-step]").forEach((el) => {
-        gsap.from(el.querySelectorAll("[data-step-in]"), {
-          yPercent: 110,
-          duration: 1.2,
-          ease: "expo.out",
-          stagger: 0.06,
-          scrollTrigger: { trigger: el, start: "top 85%", once: true },
-        });
+        playInView(
+          gsap.from(el.querySelectorAll("[data-step-in]"), {
+            yPercent: 110,
+            duration: 1.2,
+            ease: "expo.out",
+            stagger: 0.06,
+          }),
+          el,
+          "top 85%",
+        );
       });
-
     },
     { scope: section },
   );
@@ -114,19 +122,21 @@ export function About() {
       data-chapter="ink"
       data-chapter-start="top bottom"
       aria-labelledby="about-title"
-      className="relative px-gutter pb-[16vh] lg:pl-[calc(var(--gutter)+var(--rail))]"
+      className="relative overflow-x-clip px-gutter pb-[16vh] lg:pl-[calc(var(--gutter)+var(--rail))]"
     >
       {/* ── 01 · Manifesto (pinned) */}
       <div data-manifesto className="relative flex min-h-svh flex-col justify-center py-24">
         <div className="label absolute inset-x-0 top-[88px] grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:top-[100px] md:grid-cols-12">
-          <span className="col-span-2 whitespace-nowrap md:col-span-2">
-            SY 02 / {pad(chapters.length)}
-          </span>
-          <h2 id="about-title" className="hidden md:col-span-3 md:col-start-3 md:block">
+          <span className="col-span-2 whitespace-nowrap md:col-span-2">SY 02 / {pad(chapters.length)}</span>
+          <h2 id="about-title" className="sr-only md:not-sr-only md:col-span-3 md:col-start-3">
             (About) Manifesto
           </h2>
           <span className="col-span-2 col-start-3 text-right md:col-span-3 md:col-start-10">
-            Audit progress <span data-audit-progress className="tabular">000</span>%
+            Audit progress{" "}
+            <span data-audit-progress className="tabular">
+              000
+            </span>
+            %
           </span>
         </div>
 

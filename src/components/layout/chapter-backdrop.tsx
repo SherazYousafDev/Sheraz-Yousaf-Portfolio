@@ -42,7 +42,6 @@ export function ChapterBackdrop() {
     const id = requestAnimationFrame(() => {
       build();
       ScrollTrigger.sort();
-      ScrollTrigger.refresh();
     });
     return () => {
       cancelAnimationFrame(id);

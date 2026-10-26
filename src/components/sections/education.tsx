@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { playInView } from "@/lib/in-view";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { scramble } from "@/lib/scramble";
 import { certifications, chapters, education } from "@/data/portfolio";
@@ -19,8 +20,8 @@ export function Education() {
 
       q("[data-edu-row]").forEach((row) => {
         const yearEls = row.querySelectorAll<HTMLElement>("[data-year]");
-        gsap
-          .timeline({ scrollTrigger: { trigger: row, start: "top 85%", once: true } })
+        const tl = gsap
+          .timeline()
           .from(row.querySelector("[data-edu-rule]"), { scaleX: 0, transformOrigin: "0% 50%", duration: 1.2, ease: "curtain" })
           .fromTo(
             row.querySelectorAll("[data-edu-wipe]"),
@@ -29,21 +30,29 @@ export function Education() {
             0.2,
           )
           .add(() => yearEls.forEach((y) => scramble(y, y.dataset.year!, { duration: 800, chars: "0123456789" })), 0.25);
+        playInView(tl, row, "top 85%");
       });
 
-      gsap.fromTo(q("[data-cert]"), {
-        y: 40,
-        rotate: (i: number) => [-6, 4, -3][i % 3],
-        opacity: 0,
-      }, {
-        y: 0,
-        rotate: 0,
-        opacity: 1,
-        duration: 1.1,
-        ease: "back.out(1.6)",
-        stagger: 0.1,
-        scrollTrigger: { trigger: q("[data-certs]")[0], start: "top 88%", once: true },
-      });
+      playInView(
+        gsap.fromTo(
+          q("[data-cert]"),
+          {
+            y: 40,
+            rotate: (i: number) => [-6, 4, -3][i % 3],
+            opacity: 0,
+          },
+          {
+            y: 0,
+            rotate: 0,
+            opacity: 1,
+            duration: 1.1,
+            ease: "back.out(1.6)",
+            stagger: 0.1,
+          },
+        ),
+        q("[data-certs]")[0],
+        "top 88%",
+      );
     },
     { scope: section },
   );
@@ -108,7 +117,10 @@ export function Education() {
             <p className="label mb-5 opacity-60">(Certificates)</p>
             <ul className="flex flex-wrap gap-3">
               {certifications.map((c, i) => (
-                <li key={c.name} data-cert /* GSAP animates the li; the hover tilt lives on the inner box so they never fight over transform */>
+                <li
+                  key={c.name}
+                  data-cert /* GSAP animates the li; the hover tilt lives on the inner box so they never fight over transform */
+                >
                   <div className="flex items-center gap-3 rounded-[6px] border-[1.5px] border-[var(--fg)] px-4 py-3 transition-transform duration-500 ease-[var(--ease-expo)] hover:-rotate-2 hover:scale-[1.03]">
                     <span className="label grid size-7 place-items-center rounded-full bg-accent text-[#141312]">{pad(i + 1)}</span>
                     <span>

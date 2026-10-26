@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
+import { playInView } from "@/lib/in-view";
 
 type Props = {
   children: React.ReactNode;
@@ -23,13 +24,15 @@ export function RevealText({ children, as: Tag = "p", className, stagger = 0.09,
   useGSAP(
     () => {
       if (!ref.current || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      let revealed = false;
       SplitText.create(ref.current, {
         type: "lines",
         mask: "lines",
+        aria: "none",
         autoSplit: true,
         linesClass: "reveal-line",
-        onSplit: (self) =>
-          gsap.from(self.lines, {
+        onSplit: (self) => {
+          const tween = gsap.from(self.lines, {
             yPercent: 110,
             rotate: 2,
             transformOrigin: "0% 100%",
@@ -37,8 +40,13 @@ export function RevealText({ children, as: Tag = "p", className, stagger = 0.09,
             ease: "expo.out",
             stagger,
             delay,
-            scrollTrigger: { trigger: ref.current, start, once: true },
-          }),
+            onStart: () => {
+              revealed = true;
+            },
+          });
+          // autoSplit re-splits on resize: once seen, new lines land in place instead of replaying.
+          return revealed ? tween.progress(1) : playInView(tween, ref.current, start);
+        },
       });
     },
     { scope: ref },

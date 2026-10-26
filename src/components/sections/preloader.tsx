@@ -5,13 +5,7 @@ import { gsap } from "@/lib/gsap";
 import { releaseIntro } from "@/lib/intro";
 import { person } from "@/data/portfolio";
 
-const LOG = [
-  "Loading catalog",
-  "Validating SKUs",
-  "Checking bolt patterns",
-  "Reconciling TireGuru",
-  "Rendering portfolio",
-];
+const LOG = ["Loading catalog", "Validating SKUs", "Checking bolt patterns", "Reconciling TireGuru", "Rendering portfolio"];
 const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
 /**
@@ -39,7 +33,7 @@ export function Preloader() {
     // Odometer: units roll continuously; tens/hundreds only roll during the last unit.
     const render = (v: number) => {
       const units = v % 10;
-      const tens = Math.floor(v / 10) % 10 + Math.max(0, (v % 10) - 9);
+      const tens = (Math.floor(v / 10) % 10) + Math.max(0, (v % 10) - 9);
       const hundreds = Math.floor(v / 100) + Math.max(0, (v % 100) - 99);
       [hundreds, tens, units].forEach((d, i) => {
         if (cols[i]) cols[i].style.transform = `translate3d(0, ${(-d * 100) / DIGITS.length}%, 0)`;
@@ -119,7 +113,9 @@ export function Preloader() {
                 <span>›</span>
                 <span>{l}</span>
                 <span className="flex-1 overflow-hidden whitespace-nowrap opacity-40">..........................</span>
-                <span data-ok className="opacity-0">OK</span>
+                <span data-ok className="opacity-0">
+                  OK
+                </span>
               </li>
             ))}
           </ul>

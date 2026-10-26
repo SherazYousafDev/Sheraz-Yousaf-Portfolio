@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useSyncExternalStore } from "react";
+import { playInView } from "@/lib/in-view";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { scrollTo } from "@/lib/scroll-state";
 import { person, socials } from "@/data/portfolio";
@@ -11,7 +12,12 @@ import { AUDIT_EVENT } from "@/components/layout/easter-egg";
 
 const noop = () => () => {};
 /** Current year on the client only — the page is prerendered, so no Date during server render. */
-const useYear = () => useSyncExternalStore(noop, () => new Date().getFullYear(), () => null);
+const useYear = () =>
+  useSyncExternalStore(
+    noop,
+    () => new Date().getFullYear(),
+    () => null,
+  );
 
 /**
  * Sticky reveal footer. The wrapper sits in normal flow and clips a fixed
@@ -62,13 +68,16 @@ export function Footer() {
         { yPercent: -30 },
         { yPercent: 0, ease: "none", scrollTrigger: { trigger: wrap.current, start: "top bottom", end: "bottom bottom", scrub: true } },
       );
-      gsap.from(q("[data-wordmark] > span"), {
-        yPercent: 105,
-        ease: "expo.out",
-        duration: 1.4,
-        stagger: 0.06,
-        scrollTrigger: { trigger: wrap.current, start: "top 40%", once: true },
-      });
+      playInView(
+        gsap.from(q("[data-wordmark] > span"), {
+          yPercent: 105,
+          ease: "expo.out",
+          duration: 1.4,
+          stagger: 0.06,
+        }),
+        wrap.current,
+        "top 40%",
+      );
     },
     { scope: wrap },
   );
@@ -99,7 +108,10 @@ export function Footer() {
         >
           {/* the cursor-following outline CTA */}
           <div aria-hidden className="pointer-events-none absolute inset-0 grid place-items-center">
-            <div ref={follow} className="display whitespace-nowrap text-[15vw] uppercase leading-none text-transparent opacity-80 [-webkit-text-stroke:1.5px_#141312] md:text-[13vw]">
+            <div
+              ref={follow}
+              className="display whitespace-nowrap text-[15vw] uppercase leading-none text-transparent opacity-80 [-webkit-text-stroke:1.5px_#141312] md:text-[13vw]"
+            >
               Let’s talk
             </div>
           </div>
@@ -145,16 +157,16 @@ export function Footer() {
           <p
             data-wordmark
             onClick={onTapName}
-            aria-label={`${person.firstName} ${person.lastName}`}
             className="display relative mt-6 flex justify-between overflow-hidden whitespace-nowrap text-[10.6vw] uppercase leading-[0.8] tracking-[-0.04em] lg:text-[min(10.4vw,22svh)]"
           >
+            <span className="sr-only">{`${person.firstName} ${person.lastName}`}</span>
             {`${person.firstName} ${person.lastName}`.split("").map((ch, i) => (
               <span key={i} aria-hidden className="inline-block">
                 {ch === " " ? " " : ch}
               </span>
             ))}
           </p>
-          <div className="label relative mt-4 flex justify-between gap-4 opacity-70">
+          <div className="label relative mt-4 flex justify-between gap-4">
             <span>
               © {year ?? ""} {person.firstName} {person.lastName}
             </span>

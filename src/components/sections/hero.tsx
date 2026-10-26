@@ -276,7 +276,10 @@ export function Hero() {
                 <HeroPhoto />
               </div>
             </div>
-            <div data-parallax="1.1" className="absolute left-[2%] top-[40%] z-20 lg:-left-[12%] lg:top-[38%] w-[30%] min-w-[64px] max-w-[150px]">
+            <div
+              data-parallax="1.1"
+              className="absolute left-[2%] top-[40%] z-20 lg:-left-[12%] lg:top-[38%] w-[30%] min-w-[64px] max-w-[150px]"
+            >
               <div data-badge>
                 <OpenBadge className="w-full" />
               </div>
@@ -301,7 +304,10 @@ export function Hero() {
             {person.tagline}
           </p>
 
-          <div data-hero-fade className="label col-span-4 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-3 md:col-span-8">
+          <div
+            data-hero-fade
+            className="label col-span-4 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-3 md:col-span-8"
+          >
             <span className="inline-flex items-center gap-2">
               <StatusDot /> {person.availabilityLabel}
             </span>
@@ -341,4 +347,3 @@ export function Hero() {
     </section>
   );
 }
-

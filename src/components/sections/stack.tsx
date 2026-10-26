@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { playInView } from "@/lib/in-view";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { chapters, skills } from "@/data/portfolio";
 import { Marquee } from "@/components/ui/marquee";
@@ -16,21 +17,25 @@ export function Stack() {
       const q = gsap.utils.selector(section);
 
       // Marquee rows slide in from opposite sides as the chapter arrives.
-      gsap.from(q("[data-row]"), {
-        xPercent: (i) => (i === 0 ? 30 : -30),
-        opacity: 0,
-        duration: 1.6,
-        ease: "expo.out",
-        stagger: 0.1,
-        scrollTrigger: { trigger: q("[data-rows]")[0], start: "top 85%", once: true },
-      });
+      playInView(
+        gsap.from(q("[data-row]"), {
+          xPercent: (i) => (i === 0 ? 30 : -30),
+          opacity: 0,
+          duration: 1.6,
+          ease: "expo.out",
+          stagger: 0.1,
+        }),
+        q("[data-rows]")[0],
+        "top 85%",
+      );
 
       // Index table: rules draw, then each group's items cascade in.
       q("[data-group]").forEach((g, gi) => {
-        const tl = gsap.timeline({ scrollTrigger: { trigger: g, start: "top 85%", once: true }, delay: gi * 0.08 });
+        const tl = gsap.timeline({ delay: gi * 0.08 });
         tl.from(g.querySelector("[data-group-rule]"), { scaleX: 0, transformOrigin: "0% 50%", duration: 1.1, ease: "curtain" })
           .from(g.querySelectorAll("[data-group-head] > *"), { yPercent: 110, duration: 1, ease: "expo.out", stagger: 0.05 }, 0.2)
           .from(g.querySelectorAll("[data-skill]"), { yPercent: 110, duration: 0.9, ease: "expo.out", stagger: 0.035 }, 0.3);
+        playInView(tl, g, "top 85%");
       });
     },
     { scope: section },
@@ -98,7 +103,10 @@ export function Stack() {
             <ul className="mt-5">
               {g.items.map((it) => (
                 <li key={it} className="overflow-hidden border-b border-line">
-                  <span data-skill className="group/k flex items-baseline justify-between py-2.5 text-[16px] md:text-[clamp(15px,1.1vw,19px)]">
+                  <span
+                    data-skill
+                    className="group/k flex items-baseline justify-between py-2.5 text-[16px] md:text-[clamp(15px,1.1vw,19px)]"
+                  >
                     <span className="transition-transform duration-500 ease-[var(--ease-expo)] group-hover/k:translate-x-2">{it}</span>
                     <span aria-hidden className="label opacity-0 transition-opacity duration-300 group-hover/k:opacity-100">
                       ✓

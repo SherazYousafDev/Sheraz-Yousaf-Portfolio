@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { playInView } from "@/lib/in-view";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { chapters, experience } from "@/data/portfolio";
 import { RevealText } from "@/components/ui/reveal-text";
@@ -88,13 +89,16 @@ export function Experience() {
           }),
         );
         cards.forEach((c) =>
-          gsap.from(c, {
-            clipPath: "inset(0% 0% 100% 0%)",
-            y: 60,
-            duration: 1.3,
-            ease: "expo.out",
-            scrollTrigger: { trigger: c, start: "top 88%", once: true },
-          }),
+          playInView(
+            gsap.from(c, {
+              clipPath: "inset(0% 0% 100% 0%)",
+              y: 60,
+              duration: 1.3,
+              ease: "expo.out",
+            }),
+            c,
+            "top 88%",
+          ),
         );
         return () => triggers.forEach((t) => t.kill());
       });
@@ -114,9 +118,7 @@ export function Experience() {
     >
       {/* ── Header */}
       <div className="label grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:grid-cols-12">
-        <span className="col-span-2 whitespace-nowrap">
-          SY 03 / {pad(chapters.length)}
-        </span>
+        <span className="col-span-2 whitespace-nowrap">SY 03 / {pad(chapters.length)}</span>
         <span className="hidden md:col-span-3 md:col-start-3 md:block">(Experience) The paper trail</span>
         <span className="col-span-2 col-start-3 whitespace-nowrap text-right md:col-span-3 md:col-start-10">
           <span className="hidden sm:inline">{experience.length} roles · </span>
@@ -148,7 +150,7 @@ export function Experience() {
               <li
                 key={e.company}
                 data-marker
-                className="group/m relative pl-8 opacity-35 transition-opacity duration-700 ease-[var(--ease-curtain)] data-[active]:opacity-100"
+                className="group/m relative pl-8 opacity-60 transition-opacity duration-700 ease-[var(--ease-curtain)] data-[active]:opacity-100"
               >
                 <span className="absolute left-0 top-[0.55em] size-[15px] rounded-full border border-[var(--fg)] bg-[var(--bg)] transition-colors duration-500 group-data-[active]/m:border-accent group-data-[active]/m:bg-accent" />
                 <span className="display block text-[clamp(36px,3.4vw,64px)] leading-none">{yearOf(e.period)}</span>
@@ -199,7 +201,10 @@ export function Experience() {
                     </ul>
                   </div>
 
-                  <ul className="flex flex-col gap-3 md:col-span-5 lg:justify-center" aria-label={`${e.role} at ${e.company}: responsibilities`}>
+                  <ul
+                    className="flex flex-col gap-3 md:col-span-5 lg:justify-center"
+                    aria-label={`${e.role} at ${e.company}: responsibilities`}
+                  >
                     {e.points.map((p, j) => (
                       <li
                         key={j}

@@ -10,7 +10,8 @@ export function SmoothScroll() {
   // Web fonts change line breaks (and so every trigger position) — re-measure once they land.
   useEffect(() => {
     let alive = true;
-    document.fonts?.ready.then(() => alive && ScrollTrigger.refresh());
+    // Skip when the fonts were already in (the usual case, since they're preloaded).
+    if (document.fonts && document.fonts.status !== "loaded") document.fonts.ready.then(() => alive && ScrollTrigger.refresh());
     return () => {
       alive = false;
     };

@@ -20,16 +20,13 @@ export function HeroPhoto({ className }: { className?: string }) {
   const [useGL, setUseGL] = useState(false);
   const [glReady, setGlReady] = useState(false);
 
+  // The ripple only reacts to a hovering pointer, so touch screens keep the plain
+  // photo and never download three.js. Mouse users get it after the intro settles.
   useEffect(() => {
-    if (!canRunWebGL()) return;
-    if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      const id = requestAnimationFrame(() => setUseGL(true));
-      return () => cancelAnimationFrame(id);
-    }
-    // Touch devices: load after the intro, once the main thread is quiet.
+    if (!canRunWebGL() || !matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     let idle = 0;
     const off = onIntro(() => {
-      idle = window.setTimeout(() => setUseGL(true), 2500);
+      idle = window.setTimeout(() => setUseGL(true), 1200);
     });
     return () => {
       off();

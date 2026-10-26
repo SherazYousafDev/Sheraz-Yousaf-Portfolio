@@ -74,8 +74,9 @@ export function Navbar() {
         className="ui fixed inset-x-0 top-0 z-[80] px-gutter lg:pl-[calc(var(--gutter)+var(--rail))]"
       >
         <div className="flex h-16 items-center justify-between gap-6 border-b border-line md:h-[72px]">
-          <a href="#hero" onClick={go("#hero")} className="group flex items-center gap-3" aria-label="Sheraz Yousaf, back to top">
+          <a href="#hero" onClick={go("#hero")} className="group flex items-center gap-3">
             <span className="display text-[22px] leading-none tracking-[-0.04em]">SY</span>
+            <span className="sr-only">, back to top</span>
             <span className="label hidden sm:inline">
               <ScrambleText>{`${person.firstName} ${person.lastName}`}</ScrambleText>
             </span>

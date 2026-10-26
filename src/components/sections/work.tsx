@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import { playInView } from "@/lib/in-view";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { scrollTo } from "@/lib/scroll-state";
 import { chapters, projects, type Project } from "@/data/portfolio";
@@ -208,12 +209,15 @@ export function Work() {
         cleanups.push(...offs);
         if (reduced) return;
         (q("[data-panel]") as HTMLElement[]).slice(1).forEach((panel) => {
-          gsap.from(panel.querySelector("[data-frame]"), {
-            clipPath: "inset(100% 0% 0% 0%)",
-            duration: 1.3,
-            ease: "expo.out",
-            scrollTrigger: { trigger: panel, start: "top 85%", once: true },
-          });
+          playInView(
+            gsap.from(panel.querySelector("[data-frame]"), {
+              clipPath: "inset(100% 0% 0% 0%)",
+              duration: 1.3,
+              ease: "expo.out",
+            }),
+            panel,
+            "top 85%",
+          );
         });
       });
 
@@ -290,15 +294,9 @@ export function Work() {
               <div className="grid w-full grid-cols-1 gap-x-[3vw] gap-y-8 lg:grid-cols-12 lg:items-center">
                 <div className="lg:col-span-7">
                   {p.href ? (
-                    <a
-                      href={p.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      data-frame-link
-                      aria-label={`Open ${p.name} (${p.linkLabel}) in a new tab`}
-                      className="group/f block"
-                    >
+                    <a href={p.href} target="_blank" rel="noreferrer" data-frame-link className="group/f block">
                       <Frame p={p} priority={i === 0} />
+                      <span className="sr-only"> (opens in a new tab)</span>
                     </a>
                   ) : (
                     <div className="group/f">
@@ -310,9 +308,7 @@ export function Work() {
                 <div data-copy className="flex flex-col lg:col-span-5">
                   <div className="flex items-center justify-between gap-4">
                     <span className="display text-[clamp(44px,4.6vw,88px)] leading-none text-accent">{pad(i + 1)}</span>
-                    {p.latest && (
-                      <span className="label rounded-full border border-accent px-3 py-1 text-accent">Latest · Client</span>
-                    )}
+                    {p.latest && <span className="label rounded-full border border-accent px-3 py-1 text-accent">Latest · Client</span>}
                   </div>
                   <p className="label mt-4 opacity-60">
                     {p.kind} · {p.client}
@@ -350,7 +346,10 @@ export function Work() {
                       className="label group/l mt-5 inline-flex w-fit items-center gap-3 rounded-full border border-[var(--fg)] px-5 py-3 transition-colors duration-500 hover:bg-[var(--fg)] hover:text-[var(--bg)]"
                     >
                       <ScrambleText>{`Visit ${p.linkLabel}`}</ScrambleText>
-                      <span aria-hidden className="transition-transform duration-500 ease-[var(--ease-expo)] group-hover/l:-translate-y-0.5 group-hover/l:translate-x-0.5">
+                      <span
+                        aria-hidden
+                        className="transition-transform duration-500 ease-[var(--ease-expo)] group-hover/l:-translate-y-0.5 group-hover/l:translate-x-0.5"
+                      >
                         ↗
                       </span>
                     </a>
@@ -364,7 +363,10 @@ export function Work() {
         </div>
 
         {/* progress — desktop */}
-        <div aria-hidden className="label absolute inset-x-0 bottom-0 hidden h-[60px] items-center gap-6 px-gutter lg:flex lg:pl-[calc(var(--gutter)+var(--rail))]">
+        <div
+          aria-hidden
+          className="label absolute inset-x-0 bottom-0 hidden h-[60px] items-center gap-6 px-gutter lg:flex lg:pl-[calc(var(--gutter)+var(--rail))]"
+        >
           <span>
             <span data-hcount>01</span> / {pad(projects.length)}
           </span>
@@ -393,7 +395,12 @@ export function Work() {
                   className="block aspect-[16/10] w-full object-cover object-top"
                 />
               ) : (
-                <div key={i} data-trail-face={i} hidden className="display flex aspect-[16/10] w-full items-end bg-accent p-4 text-[28px] leading-none text-[#141312]">
+                <div
+                  key={i}
+                  data-trail-face={i}
+                  hidden
+                  className="display flex aspect-[16/10] w-full items-end bg-accent p-4 text-[28px] leading-none text-[#141312]"
+                >
                   {p.name}
                 </div>
               ),
