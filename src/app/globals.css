@@ -1,26 +1,218 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ───────────────────────── Tokens ─────────────────────────
+   One neutral base + one accent ("red pen").
+   Chapters: every section declares data-chapter="paper|ink|accent";
+   the fixed backdrop crossfades between them as you scroll. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #eeebe4;
+  --ink: #141312;
+  --accent: #e5401a;
+
+  --c-paper-bg: var(--paper);
+  --c-paper-fg: var(--ink);
+  --c-ink-bg: var(--ink);
+  --c-ink-fg: var(--paper);
+  --c-accent-bg: var(--accent);
+  --c-accent-fg: var(--ink);
+
+  --grain-opacity: 0.07;
+  --vignette: 0;
+
+  --ease-curtain: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  --gutter: clamp(16px, 2.2vw, 40px);
+  --rail: clamp(0px, 3.2vw, 56px);
+
+  color-scheme: light;
 }
+
+/* Dark is its own design — a darkroom: warm black, bone type, a hotter
+   safelight accent, heavier grain and a vignette. Not an inversion. */
+:root[data-theme="dark"] {
+  --paper: #0c0b0a;
+  --ink: #e8e2d6;
+  --accent: #ff5b2e;
+
+  --c-paper-bg: #0c0b0a;
+  --c-paper-fg: #e8e2d6;
+  --c-ink-bg: #d9d1c3;
+  --c-ink-fg: #0c0b0a;
+  --c-accent-bg: #ff5b2e;
+  --c-accent-fg: #0c0b0a;
+
+  --grain-opacity: 0.11;
+  --vignette: 1;
+
+  color-scheme: dark;
+}
+
+[data-chapter="paper"] { --bg: var(--c-paper-bg); --fg: var(--c-paper-fg); }
+[data-chapter="ink"] { --bg: var(--c-ink-bg); --fg: var(--c-ink-fg); }
+[data-chapter="accent"] { --bg: var(--c-accent-bg); --fg: var(--c-accent-fg); }
+[data-chapter] { color: var(--fg); --line: color-mix(in oklab, var(--fg) 14%, transparent); }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-accent: var(--accent);
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-line: var(--line);
+
+  --font-display: var(--font-clash), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --ease-curtain: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --breakpoint-3xl: 120rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ───────────────────────── Base ───────────────────────── */
+html {
+  --bg: var(--c-paper-bg);
+  --fg: var(--c-paper-fg);
+  --line: color-mix(in oklab, var(--fg) 14%, transparent);
+  background: var(--c-paper-bg);
+  color: var(--c-paper-fg);
+  -webkit-text-size-adjust: 100%;
+}
+
+/* body stays transparent: its background would paint over the fixed
+   chapter plates (negative z-index) and hide every colour change. */
+body {
+  background: transparent;
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "ss03";
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--accent); color: #141312; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+
+/* ─────────────── Editorial utilities ─────────────── */
+@utility label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-feature-settings: "zero" 1;
+}
+
+@utility serif-i {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 0.82;
+  letter-spacing: -0.035em;
+}
+
+@utility px-gutter {
+  padding-inline: var(--gutter);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Underline that draws in from the left and exits to the right. */
+@utility link-draw {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.12em;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s var(--ease-curtain);
+  }
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* On repeat visits (no preloader) hide choreographed content until GSAP
+   has set its start states. On first visit the preloader covers it, so it
+   paints immediately underneath (keeps LCP fast). */
+html.js.seen:not(.intro-ready) [data-intro] { visibility: hidden; }
+
+/* Preloader only on first visit per session. */
+html.seen [data-preloader] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
+
+/* View-transition theme switch: the new snapshot is revealed by a
+   clip-path circle animated from JS; disable the default crossfade. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) { z-index: 2; }
+::view-transition-old(root) { z-index: 1; }
+
+@keyframes pulse-dot {
+  0%   { transform: scale(1); opacity: 0.7; }
+  80%, 100% { transform: scale(2.6); opacity: 0; }
+}
+@keyframes cue-line {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  45%  { transform: scaleY(1); transform-origin: top; }
+  55%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* Fixed UI (nav, rail) recolours to the chapter under the viewport. */
+.ui {
+  --fg: var(--c-paper-fg);
+  --bg: var(--c-paper-bg);
+  color: var(--fg);
+  transition: color 0.7s var(--ease-curtain);
+}
+html[data-chapter="ink"] .ui { --fg: var(--c-ink-fg); --bg: var(--c-ink-bg); }
+html[data-chapter="accent"] .ui { --fg: var(--c-accent-fg); --bg: var(--c-accent-bg); }
+.ui { --line: color-mix(in oklab, var(--fg) 18%, transparent); }
+html .ui[data-menu-open] { --fg: var(--c-ink-fg); --bg: var(--c-ink-bg); }
+
+/* The darkroom vignette only belongs on dark plates — hide it on the bone chapter. */
+html[data-chapter="ink"] [data-vignette] { opacity: 0 !important; }

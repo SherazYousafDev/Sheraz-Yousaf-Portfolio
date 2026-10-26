@@ -1,0 +1,218 @@
+/**
+ * Every piece of content on the site lives here.
+ * Source of truth: Sheraz_Yousaf_Resume_Updated.docx — nothing below is invented.
+ * Search for "TODO" to find content the resume didn't contain.
+ */
+
+export const site = {
+  // TODO: replace with your final production domain once deployed on Vercel.
+  url: "https://sheraz-yousaf.vercel.app",
+  title: "Sheraz Yousaf — Data Analyst & Frontend Developer, Lahore",
+  description:
+    "Sheraz Yousaf is a Lahore-based Data Analyst working in product data management — data validation, catalog audits and reporting — with a background in frontend development.",
+};
+
+export const person = {
+  firstName: "Sheraz",
+  lastName: "Yousaf",
+  initials: "SY",
+  location: "Lahore, Pakistan",
+  timeZone: "Asia/Karachi",
+  coordinates: "31.5204° N, 74.3587° E",
+  email: "sheraz.devv@gmail.com",
+  phone: "+92 326 5897172",
+  available: true,
+  availabilityLabel: "Open to Data Analyst roles",
+  /** Rotated through the scramble effect in the hero. */
+  roles: ["Data Analyst", "Product Data Analyst", "Data Quality Analyst", "Frontend Developer"],
+  /** Hero one-liner. Short, specific, true to the resume. */
+  tagline: "I find what’s wrong in product data — and I still build what’s right on screen.",
+  photo: { src: "/images/sheraz.webp", alt: "Portrait of Sheraz Yousaf in a navy blazer, arms crossed" },
+  resume: "/Sheraz-Yousaf-Resume.pdf",
+};
+
+export const socials = [
+  { label: "LinkedIn", short: "Li", href: "https://linkedin.com/in/sheraz-yousaf" },
+  { label: "GitHub", short: "Gh", href: "https://github.com/SherazYousafDev" },
+  { label: "Old portfolio", short: "Pf", href: "https://sheraz-yousaf.netlify.app/" },
+];
+
+export const nav = [
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Work", href: "#work" },
+  { label: "Stack", href: "#stack" },
+  { label: "Contact", href: "#contact" },
+];
+
+export const about = {
+  /**
+   * Words light up as you scroll.
+   * *word* = serif-italic accent · [word words] = data term, gets a red-pen underline.
+   */
+  manifesto:
+    "I spend my days inside spreadsheets nobody else wants to open — comparing vendor sheets, WooCommerce and TireGuru line by line until every [SKU], [bolt pattern] and [price] *agrees*. Before data, I built responsive interfaces in React and Tailwind. Same instinct, different medium: find what’s *broken*, document it, fix it, follow up.",
+  /** The spec sheet — key facts, all from the resume. */
+  facts: [
+    { k: "Based in", v: "Lahore, Pakistan", live: true },
+    { k: "Now", v: "Data Analyst at EDatix — since June 2026" },
+    { k: "Catalog", v: "SD Tire & Wheel product data" },
+    { k: "Before", v: "Frontend Developer — Zaions, CodeAlpha" },
+    { k: "Studied", v: "BS Information Technology, University of Education" },
+    { k: "Looking for", v: "Data Analyst · Product Data Analyst · Data Quality Analyst" },
+  ],
+  /** How the work actually goes, condensed from the EDatix bullets. */
+  method: [
+    { t: "Compare", d: "Vendor spreadsheets against WooCommerce and TireGuru, line by line, to surface every inconsistency." },
+    { t: "Audit", d: "SKU, wheel size, bolt pattern, center bore, offset, finish and pricing — missing, wrong or duplicated." },
+    { t: "Report", d: "Product audit reports covering missing SKUs, attributes, images and other catalog issues." },
+    { t: "Fix & follow up", d: "Clean brand sheets for upload, request corrections from the team and follow every update through." },
+  ],
+};
+
+export const experience = [
+  {
+    role: "Data Analyst",
+    company: "EDatix",
+    location: "Lahore, Pakistan",
+    period: "June 2026 — Present",
+    current: true,
+    summary: "Product data management for SD Tire & Wheel operations.",
+    points: [
+      "Organize, clean, validate and review product data in Excel and Google Sheets for SD Tire & Wheel operations.",
+      "Compare product information across vendor spreadsheets, WooCommerce and TireGuru (TG) to identify inconsistencies.",
+      "Audit wheel attributes — SKU, wheel size, bolt pattern, center bore, offset, finish, pricing — for missing info, wrong attributes, duplicate groups and inconsistent descriptions.",
+      "Review product searchability by wheel size and bolt pattern in TireGuru and document products that aren’t searchable.",
+      "Prepare product audit reports covering missing SKUs, attributes, images and other catalog issues.",
+      "Clean and prepare brand-specific spreadsheets for TireGuru upload; organize product images and add image links to data sheets.",
+      "Support pricing and inventory checks by comparing supplier data with existing catalog information.",
+      "Coordinate with the team to report issues, request corrections and follow up on product data updates.",
+    ],
+    tags: ["Excel", "Google Sheets", "WooCommerce", "TireGuru", "Data Auditing"],
+  },
+  {
+    role: "Frontend Developer Intern",
+    company: "CodeAlpha",
+    location: "Remote",
+    period: "March 2025 — April 2025",
+    current: false,
+    summary: "Responsive UI components, shipped remotely.",
+    points: [
+      "Built and improved responsive UI components using HTML, CSS and JavaScript for different devices and screen sizes.",
+      "Gained practical experience working on frontend development tasks in a remote environment.",
+    ],
+    tags: ["HTML", "CSS", "JavaScript"],
+  },
+  {
+    role: "Frontend Developer",
+    company: "Zaions",
+    location: "Lahore, Pakistan",
+    period: "May 2024 — July 2024",
+    current: false,
+    summary: "Layouts, page structure and visual consistency.",
+    points: [
+      "Developed and improved responsive layouts using HTML and CSS for different screen sizes.",
+      "Assisted with refining UI components, page structure and visual consistency.",
+    ],
+    tags: ["HTML", "CSS", "Responsive"],
+  },
+];
+
+export type Project = {
+  name: string;
+  kind: string;
+  year: string;
+  stack: string[];
+  href?: string;
+  linkLabel?: string;
+  image?: string;
+  problem: string;
+  solution: string;
+  result: string;
+};
+
+export const projects: Project[] = [
+  {
+    name: "Arkgenisys",
+    kind: "Web application",
+    year: "TODO: year",
+    stack: ["React", "Tailwind CSS", "React Router", "Netlify"],
+    href: "https://arkgenisys.com",
+    linkLabel: "arkgenisys.com",
+    image: "/images/projects/arkgenisys.webp",
+    problem: "The brand needed a fast, responsive web presence that moved between pages without full reloads.",
+    solution: "A React + Tailwind single-page app with client-side navigation via React Router.",
+    // TODO: add a measurable result if you have one (traffic, Lighthouse score, client feedback).
+    result: "Deployed on Netlify behind a custom domain configured through Hostinger — live today.",
+  },
+  {
+    name: "Geo Leaders",
+    kind: "Website",
+    year: "TODO: year",
+    stack: ["React", "Tailwind CSS", "React Router", "Netlify"],
+    href: "https://geo-leaders.com/",
+    linkLabel: "geo-leaders.com",
+    image: "/images/projects/geo-leaders.webp",
+    problem: "A responsive site that had to work on every screen size with clean, routable pages.",
+    solution: "Built in React and Tailwind with client-side routing for instant page changes.",
+    // TODO: add a measurable result if you have one.
+    result: "Deployed on Netlify with a custom domain through Namecheap — live today.",
+  },
+  {
+    name: "CargoSphere",
+    kind: "Final Year Project",
+    year: "TODO: year",
+    stack: ["React", "Tailwind CSS"],
+    // TODO: add a live preview or GitHub link for CargoSphere.
+    href: undefined,
+    image: undefined,
+    problem: "Booking a parcel usually means guessing at freight modes and prices before you can track anything.",
+    solution: "A parcel booking app with a freight mode selector, a pricing calculator and a tracking dashboard.",
+    result: "Designed around responsive layouts, accessibility and usability from the first screen.",
+  },
+];
+
+export const skills = {
+  marqueeTop: ["Excel", "Google Sheets", "SQL", "WooCommerce", "TireGuru", "Data Validation", "Data Cleaning"],
+  marqueeBottom: ["React", "JavaScript", "Tailwind CSS", "HTML", "CSS", "Git", "Supabase", "Netlify", "Bootstrap"],
+  groups: [
+    { title: "Data & Databases", items: ["Microsoft Excel", "Google Sheets", "SQL"] },
+    {
+      title: "Analysis & Operations",
+      items: [
+        "Data Cleaning",
+        "Data Validation",
+        "Data Quality Checks",
+        "Data Auditing",
+        "Product Data Management",
+        "Product Catalog Management",
+        "Inventory Data Comparison",
+        "Data Reporting",
+      ],
+    },
+    { title: "E-commerce & Tools", items: ["WooCommerce", "TireGuru (TG)", "Git", "GitHub", "Netlify", "Supabase"] },
+    { title: "Frontend", items: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Bootstrap"] },
+  ],
+};
+
+export const education = [
+  { degree: "BS Information Technology (BSIT)", school: "University of Education, Lahore", period: "Aug 2023 — May 2025" },
+  { degree: "BS Computer Science (ADP)", school: "Riphah International University", period: "Mar 2021 — Aug 2023" },
+];
+
+export const certifications = [
+  { name: "JavaScript for Beginners", issuer: "Simplilearn" },
+  { name: "Fundamentals of Database", issuer: "Simplilearn" },
+  { name: "Programming with Python", issuer: "Simplilearn" },
+];
+
+/** Section index used for the "SY-0X / 07" labels and the rail. */
+export const chapters = [
+  { id: "hero", label: "Index" },
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "work", label: "Selected Work" },
+  { id: "stack", label: "Stack" },
+  { id: "education", label: "Education" },
+  { id: "contact", label: "Contact" },
+] as const;
