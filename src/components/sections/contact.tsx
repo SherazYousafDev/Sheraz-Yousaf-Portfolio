@@ -7,6 +7,7 @@ import { Magnetic } from "@/components/ui/magnetic";
 import { WipeButton } from "@/components/ui/wipe-button";
 import { LocalTime } from "@/components/ui/local-time";
 import { StatusDot } from "@/components/ui/status-dot";
+import { ScrambleText } from "@/components/ui/scramble-text";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -78,7 +79,7 @@ export function Contact() {
       ref={section}
       data-chapter="ink"
       aria-labelledby="contact-title"
-      className="relative flex min-h-svh flex-col px-gutter pb-10 pt-[16vh] lg:pl-[calc(var(--gutter)+var(--rail))]"
+      className="relative flex min-h-svh flex-col px-gutter pb-16 pt-[16vh] lg:pl-[calc(var(--gutter)+var(--rail))]"
     >
       <div className="label grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:grid-cols-12">
         <span className="col-span-2 whitespace-nowrap">SY-07 / {pad(chapters.length)}</span>
@@ -149,7 +150,7 @@ export function Contact() {
           <p className="label mb-3 opacity-60">Résumé</p>
           <Magnetic strength={0.3}>
             <WipeButton href={person.resume} download="Sheraz-Yousaf-Resume.pdf" data-cursor="Download" className="label px-5 py-3.5">
-              Download PDF ↓
+              <ScrambleText>Download PDF</ScrambleText> ↓
             </WipeButton>
           </Magnetic>
           <p className="label mt-5 opacity-60">

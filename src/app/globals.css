@@ -219,3 +219,13 @@ html .ui[data-menu-open] { --fg: var(--c-ink-fg); --bg: var(--c-ink-bg); }
 /* The darkroom vignette only belongs on dark plates — hide it on the bone chapter. */
 html[data-chapter="ink"] [data-vignette],
 html[data-chapter="accent"] [data-vignette] { opacity: 0 !important; }
+
+/* Custom cursor replaces the native one on fine pointers (text fields keep theirs). */
+html.has-cursor, html.has-cursor * { cursor: none; }
+html.has-cursor input, html.has-cursor textarea { cursor: text; }
+
+/* Easter egg — "audit mode": everything gets a red-pen box. */
+html.audit-mode main :where(h1, h2, h3, p, li, a, button, img, article, dd, dt) {
+  outline: 1.5px dashed var(--accent);
+  outline-offset: 3px;
+}

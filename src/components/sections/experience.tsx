@@ -124,11 +124,13 @@ export function Experience() {
         </span>
       </div>
       <div className="grid grid-cols-4 items-end gap-x-4 pb-[6vh] pt-[5vh] md:grid-cols-12">
-        <RevealText as="h2" className="display col-span-4 text-[17vw] uppercase md:col-span-9 md:text-[min(10.5vw,20svh)]">
-          <span id="experience-title">
-            Where I’ve <span className="serif-i normal-case text-accent">worked</span>
-          </span>
-        </RevealText>
+        <div data-velocity className="col-span-4 md:col-span-9">
+          <RevealText as="h2" className="display text-[17vw] uppercase md:text-[min(10.5vw,20svh)]">
+            <span id="experience-title">
+              Where I’ve <span className="serif-i normal-case text-accent">worked</span>
+            </span>
+          </RevealText>
+        </div>
         <p className="col-span-4 mt-6 max-w-[34ch] text-[15px] leading-relaxed opacity-70 md:col-span-3 md:mt-0 md:pb-[1.2vw]">
           Newest first. A data role now, frontend before it — the same habit of checking every detail twice.
         </p>

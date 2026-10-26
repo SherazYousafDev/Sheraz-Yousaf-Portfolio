@@ -5,6 +5,7 @@ import Image from "next/image";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { scrollTo } from "@/lib/scroll-state";
 import { chapters, projects, type Project } from "@/data/portfolio";
+import { ScrambleText } from "@/components/ui/scramble-text";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const slug = (p: Project) => p.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -245,7 +246,7 @@ export function Work() {
               <span>SY-04 / {pad(chapters.length)}</span>
               <span>(Selected work)</span>
             </div>
-            <h2 id="work-title" className="display mt-[5vh] text-[19vw] uppercase leading-[0.82] lg:text-[min(8.6vw,17svh)]">
+            <h2 id="work-title" data-velocity className="display mt-[5vh] text-[19vw] uppercase leading-[0.82] lg:text-[min(8.6vw,17svh)]">
               Selected <span className="serif-i normal-case text-accent">work</span>
             </h2>
             <p className="mt-6 max-w-[38ch] text-[15px] leading-relaxed opacity-70 md:text-[16px]">
@@ -351,7 +352,7 @@ export function Work() {
                       data-cursor="Open"
                       className="label group/l mt-5 inline-flex w-fit items-center gap-3 rounded-full border border-[var(--fg)] px-5 py-3 transition-colors duration-500 hover:bg-[var(--fg)] hover:text-[var(--bg)]"
                     >
-                      Visit {p.linkLabel}
+                      <ScrambleText>{`Visit ${p.linkLabel}`}</ScrambleText>
                       <span aria-hidden className="transition-transform duration-500 ease-[var(--ease-expo)] group-hover/l:-translate-y-0.5 group-hover/l:translate-x-0.5">
                         ↗
                       </span>

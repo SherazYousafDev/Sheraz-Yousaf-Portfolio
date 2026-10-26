@@ -5,6 +5,8 @@ import { Work } from "@/components/sections/work";
 import { Stack } from "@/components/sections/stack";
 import { Education } from "@/components/sections/education";
 import { Contact } from "@/components/sections/contact";
+import { Footer } from "@/components/sections/footer";
+import { VelocitySkew } from "@/components/layout/velocity-skew";
 
 export default function Home() {
   return (
@@ -16,6 +18,9 @@ export default function Home() {
       <Stack />
       <Education />
       <Contact />
+      <Footer />
+      {/* inside the page so it only touches headings after they have hydrated */}
+      <VelocitySkew />
     </main>
   );
 }

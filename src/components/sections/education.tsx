@@ -68,7 +68,7 @@ export function Education() {
         {/* Title column — sticky beside the rows on desktop */}
         <div className="col-span-4 md:col-span-4">
           <div className="md:sticky md:top-[120px]">
-            <h2 id="education-title" className="display text-[15vw] uppercase leading-[0.85] md:text-[min(6.6vw,14svh)]">
+            <h2 id="education-title" data-velocity className="display text-[15vw] uppercase leading-[0.85] md:text-[min(6.6vw,14svh)]">
               Studied
               <br />
               <span className="serif-i normal-case text-accent">&amp; certified</span>

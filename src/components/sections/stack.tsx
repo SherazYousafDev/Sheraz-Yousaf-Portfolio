@@ -55,7 +55,7 @@ export function Stack() {
           </span>
         </div>
         <div className="grid grid-cols-4 items-end gap-x-4 pt-[5vh] md:grid-cols-12">
-          <h2 id="stack-title" className="display col-span-4 text-[16vw] uppercase md:col-span-8 md:text-[min(9.5vw,18svh)]">
+          <h2 id="stack-title" data-velocity className="display col-span-4 text-[16vw] uppercase md:col-span-8 md:text-[min(9.5vw,18svh)]">
             The <span className="serif-i normal-case">toolkit</span>
           </h2>
           <p className="col-span-4 mt-6 max-w-[34ch] text-[15px] leading-relaxed md:col-span-4 md:mt-0 md:pb-[1vw]">
