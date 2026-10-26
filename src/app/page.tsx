@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
 import { Experience } from "@/components/sections/experience";
+import { Work } from "@/components/sections/work";
 import { Placeholder } from "@/components/sections/placeholder";
 
 export default function Home() {
@@ -9,7 +10,7 @@ export default function Home() {
       <Hero />
       <About />
       <Experience />
-      <Placeholder id="work" chapter="ink" />
+      <Work />
       <Placeholder id="stack" chapter="accent" />
       <Placeholder id="education" chapter="paper" />
       <Placeholder id="contact" chapter="ink" />

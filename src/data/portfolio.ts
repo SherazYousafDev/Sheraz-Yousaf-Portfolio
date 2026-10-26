@@ -120,8 +120,13 @@ export const experience = [
 
 export type Project = {
   name: string;
+  /** Short client/industry line shown under the name. */
+  client: string;
   kind: string;
-  year: string;
+  /** Leave undefined to hide the year until you confirm it. */
+  year?: string;
+  /** Shows a "Latest" badge. */
+  latest?: boolean;
   stack: string[];
   href?: string;
   linkLabel?: string;
@@ -131,41 +136,62 @@ export type Project = {
   result: string;
 };
 
+/** Order = order on the page. Problem/solution lines are based on what each live site actually offers. */
 export const projects: Project[] = [
   {
+    name: "NAG Prime Engineering",
+    client: "Electrical & solar contractor",
+    kind: "Client website",
+    year: "2026",
+    latest: true,
+    // Verified from the live build: React + Vite bundle, Tailwind CSS v4, served by Netlify.
+    stack: ["React", "Vite", "Tailwind CSS", "Netlify", "Cloudflare"],
+    href: "https://nagprimeengineering.com",
+    linkLabel: "nagprimeengineering.com",
+    image: "/images/projects/nag-prime.webp",
+    problem:
+      "An electrical and solar contractor needed one clear home for seven service lines — wiring, solar, industrial, maintenance, AC, optical fibre and lifts — that turns visitors into quote requests.",
+    solution:
+      "A fast React + Vite site styled with Tailwind CSS: a service page for each line with the typical work listed, a running services ticker, and call / Get a Quote actions always in reach.",
+    // TODO: add a measurable result if the client shares one (enquiries, calls, load time).
+    result: "Delivered for the client and live on Netlify, on a custom domain managed through Cloudflare.",
+  },
+  {
     name: "Arkgenisys",
-    kind: "Web application",
-    year: "TODO: year",
+    client: "Digital agency",
+    kind: "Agency website",
+    // TODO: add the year you built Arkgenisys.
     stack: ["React", "Tailwind CSS", "React Router", "Netlify"],
     href: "https://arkgenisys.com",
     linkLabel: "arkgenisys.com",
     image: "/images/projects/arkgenisys.webp",
-    problem: "The brand needed a fast, responsive web presence that moved between pages without full reloads.",
-    solution: "A React + Tailwind single-page app with client-side navigation via React Router.",
+    problem:
+      "A digital agency needed a site that sells four services — UI/UX, web development, graphic design and marketing — and shows its featured work.",
+    solution: "A React + Tailwind single-page app with client-side navigation via React Router, so pages switch without full reloads.",
     // TODO: add a measurable result if you have one (traffic, Lighthouse score, client feedback).
     result: "Deployed on Netlify behind a custom domain configured through Hostinger — live today.",
   },
   {
     name: "Geo Leaders",
-    kind: "Website",
-    year: "TODO: year",
+    client: "Piling & geotechnical contractor, Dubai",
+    kind: "Company website",
+    // TODO: add the year you built Geo Leaders.
     stack: ["React", "Tailwind CSS", "React Router", "Netlify"],
     href: "https://geo-leaders.com/",
     linkLabel: "geo-leaders.com",
     image: "/images/projects/geo-leaders.webp",
-    problem: "A responsive site that had to work on every screen size with clean, routable pages.",
-    solution: "Built in React and Tailwind with client-side routing for instant page changes.",
+    problem:
+      "A Dubai piling and geotechnical contractor needed its services, projects and certificates presented clearly, with a quote request one click away.",
+    solution: "Built in React and Tailwind with client-side routing for instant page changes across every screen size.",
     // TODO: add a measurable result if you have one.
     result: "Deployed on Netlify with a custom domain through Namecheap — live today.",
   },
   {
     name: "CargoSphere",
+    client: "Parcel booking & tracking",
     kind: "Final Year Project",
-    year: "TODO: year",
+    // TODO: add the year (your BSIT finished May 2025) and a live preview or GitHub link.
     stack: ["React", "Tailwind CSS"],
-    // TODO: add a live preview or GitHub link for CargoSphere.
-    href: undefined,
-    image: undefined,
     problem: "Booking a parcel usually means guessing at freight modes and prices before you can track anything.",
     solution: "A parcel booking app with a freight mode selector, a pricing calculator and a tracking dashboard.",
     result: "Designed around responsive layouts, accessibility and usability from the first screen.",
