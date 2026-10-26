@@ -74,7 +74,7 @@ export function Navbar() {
         className="ui fixed inset-x-0 top-0 z-[80] px-gutter lg:pl-[calc(var(--gutter)+var(--rail))]"
       >
         <div className="flex h-16 items-center justify-between gap-6 border-b border-line md:h-[72px]">
-          <a href="#hero" onClick={go("#hero")} className="group flex items-center gap-3" aria-label="Sheraz Yousaf — back to top">
+          <a href="#hero" onClick={go("#hero")} className="group flex items-center gap-3" aria-label="Sheraz Yousaf, back to top">
             <span className="display text-[22px] leading-none tracking-[-0.04em]">SY</span>
             <span className="label hidden sm:inline">
               <ScrambleText>{`${person.firstName} ${person.lastName}`}</ScrambleText>
@@ -133,7 +133,7 @@ export function Navbar() {
             animate={{ clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 0.9, ease: curtain } }}
             exit={{ clipPath: "inset(0% 0% 100% 0%)", transition: { duration: 0.7, ease: curtain, delay: 0.15 } }}
           >
-            <p className="label mb-6 opacity-60">SY-00 / Index</p>
+            <p className="label mb-6 opacity-60">SY 00 / Index</p>
             <ul className="flex flex-1 flex-col justify-center gap-1">
               {nav.map((item, i) => (
                 <li key={item.href} className="overflow-hidden border-b border-line">
@@ -168,7 +168,7 @@ export function Navbar() {
                 </a>
               ))}
               <span className="col-span-2 flex items-center gap-2 opacity-70">
-                <StatusDot /> Lahore — <LocalTime />
+                <StatusDot /> Lahore · <LocalTime />
               </span>
             </motion.div>
           </motion.div>

@@ -106,7 +106,7 @@ export function Preloader() {
         <div className="flex items-start justify-between" data-pl-fade>
           <span className="display text-[28px] tracking-[-0.04em]">SY</span>
           <span className="label text-right">
-            {person.firstName} {person.lastName} — Portfolio ’26
+            {person.firstName} {person.lastName} · Portfolio ’26
             <br />
             <span className="opacity-60">{person.coordinates}</span>
           </span>

@@ -106,7 +106,7 @@ export function Footer() {
 
           <div className="label relative grid grid-cols-2 gap-x-4 gap-y-6 border-b border-[#141312]/25 pb-4 md:grid-cols-4">
             <span>(End of file)</span>
-            <span className="hidden md:block">Lahore — {person.coordinates}</span>
+            <span className="hidden md:block">Lahore · {person.coordinates}</span>
             <span className="text-right md:text-left">
               Local <LocalTime seconds /> PKT
             </span>
@@ -160,9 +160,9 @@ export function Footer() {
             </span>
             <span className="hidden sm:inline">Designed &amp; built by hand in Lahore</span>
             <span className="hidden [@media(hover:hover)]:inline">
-              Psst — type <kbd className="font-mono">sheraz</kbd>
+              Psst, type <kbd className="font-mono">sheraz</kbd>
             </span>
-            <span className="[@media(hover:hover)]:hidden">Psst — tap the name 5×</span>
+            <span className="[@media(hover:hover)]:hidden">Psst, tap the name 5×</span>
           </div>
         </div>
       </div>

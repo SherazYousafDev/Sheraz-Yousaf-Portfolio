@@ -55,7 +55,7 @@ export function EasterEgg() {
     };
     addEventListener("keydown", key);
     addEventListener(AUDIT_EVENT, start);
-    console.log("%cSY%c  Psst — type “sheraz” anywhere on the page.", "background:#e5401a;color:#141312;padding:2px 6px;font-weight:700", "color:inherit");
+    console.log("%cSY%c  Psst, type “sheraz” anywhere on the page.", "background:#e5401a;color:#141312;padding:2px 6px;font-weight:700", "color:inherit");
     return () => {
       removeEventListener("keydown", key);
       removeEventListener(AUDIT_EVENT, start);
@@ -127,7 +127,7 @@ export function EasterEgg() {
               className="flex flex-col items-center rounded-[14px] border-[5px] border-accent bg-[color-mix(in_oklab,var(--c-paper-bg)_88%,transparent)] px-[4vw] py-[2.5vw] text-center text-accent"
             >
               <span className="display text-[clamp(44px,8vw,140px)] leading-[0.85]">100% data quality</span>
-              <span className="label mt-3 text-[13px] tracking-[0.3em]">✓ Audited by SY — every record verified</span>
+              <span className="label mt-3 text-[13px] tracking-[0.3em]">✓ Audited by SY · every record verified</span>
             </div>
           </div>
         </>

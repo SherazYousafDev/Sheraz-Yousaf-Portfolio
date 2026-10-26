@@ -120,10 +120,10 @@ export function About() {
       <div data-manifesto className="relative flex min-h-svh flex-col justify-center py-24">
         <div className="label absolute inset-x-0 top-[88px] grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:top-[100px] md:grid-cols-12">
           <span className="col-span-2 whitespace-nowrap md:col-span-2">
-            SY-02 / {pad(chapters.length)}
+            SY 02 / {pad(chapters.length)}
           </span>
           <h2 id="about-title" className="hidden md:col-span-3 md:col-start-3 md:block">
-            (About) — Manifesto
+            (About) Manifesto
           </h2>
           <span className="col-span-2 col-start-3 text-right md:col-span-3 md:col-start-10">
             Audit progress <span data-audit-progress className="tabular">000</span>%
@@ -187,7 +187,7 @@ export function About() {
         </div>
 
         <div className="col-span-4 md:col-span-6 md:col-start-7">
-          <p className="label mb-6 opacity-60">(Method — how a catalog gets clean)</p>
+          <p className="label mb-6 opacity-60">(Method: how a catalog gets clean)</p>
           <ol>
             {about.method.map((m, i) => (
               <li key={m.t} data-step className="grid grid-cols-[auto_1fr] gap-x-6 border-t border-line py-6 last:border-b">

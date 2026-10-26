@@ -34,7 +34,7 @@ function CardBody({ card, index }: { card: Card; index: number }) {
         {card.image ? (
           <Image
             src={card.image}
-            alt={`${card.name} — screenshot`}
+            alt={`${card.name} screenshot`}
             fill
             sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover object-top transition-transform duration-1000 ease-[var(--ease-expo)] group-hover/card:scale-[1.06]"
@@ -156,8 +156,8 @@ export function Playground() {
       className="relative px-gutter pb-[18vh] pt-[18vh] lg:pl-[calc(var(--gutter)+var(--rail))]"
     >
       <div className="label grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:grid-cols-12">
-        <span className="col-span-2 whitespace-nowrap">SY-05 / {pad(chapters.length)}</span>
-        <span className="hidden md:col-span-3 md:col-start-3 md:block">(Playground) — side experiments</span>
+        <span className="col-span-2 whitespace-nowrap">SY 05 / {pad(chapters.length)}</span>
+        <span className="hidden md:col-span-3 md:col-start-3 md:block">(Playground) Side experiments</span>
         <span className="col-span-2 col-start-3 text-right md:col-span-3 md:col-start-10">{playground.length} raw files</span>
       </div>
 
@@ -173,7 +173,7 @@ export function Playground() {
           </span>
         </h2>
         <p className="col-span-4 mt-6 max-w-[34ch] text-[15px] leading-relaxed opacity-70 md:col-span-4 md:mt-0 md:pb-[2vw]">
-          Things I build to learn — music players, editors, a macOS-style portfolio. Hover one; the rest step back.
+          Things I build to learn: music players, editors and a portfolio styled like macOS. Hover one and the rest step back.
         </p>
       </div>
 

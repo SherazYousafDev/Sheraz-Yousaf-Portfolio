@@ -57,8 +57,8 @@ export function Education() {
       className="relative px-gutter pb-[16vh] pt-[18vh] lg:pl-[calc(var(--gutter)+var(--rail))]"
     >
       <div className="label grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:grid-cols-12">
-        <span className="col-span-2 whitespace-nowrap">SY-07 / {pad(chapters.length)}</span>
-        <span className="hidden md:col-span-3 md:col-start-3 md:block">(Education) — the transcript</span>
+        <span className="col-span-2 whitespace-nowrap">SY 07 / {pad(chapters.length)}</span>
+        <span className="hidden md:col-span-3 md:col-start-3 md:block">(Education) The transcript</span>
         <span className="col-span-2 col-start-3 text-right md:col-span-3 md:col-start-10">
           {education.length} degrees · {certifications.length} certificates
         </span>
@@ -74,7 +74,7 @@ export function Education() {
               <span className="serif-i normal-case text-accent">&amp; certified</span>
             </h2>
             <p className="mt-6 max-w-[30ch] text-[15px] leading-relaxed opacity-70">
-              Computer science first, then information technology — with short courses in JavaScript, databases and Python along the way.
+              Computer science first, then information technology, with short courses in JavaScript, databases and Python along the way.
             </p>
           </div>
         </div>
@@ -94,7 +94,7 @@ export function Education() {
                   <p data-edu-wipe className="col-span-4 mt-4 md:col-span-3 md:mt-0 md:text-right">
                     <span className="display block text-[clamp(30px,3.2vw,54px)] leading-none tabular">
                       <span data-year={from}>{from}</span>
-                      <span className="opacity-40"> — </span>
+                      <span className="serif-i px-[0.15em] text-[0.6em] opacity-50">to</span>
                       <span data-year={to}>{to}</span>
                     </span>
                     <span className="label mt-2 block opacity-60">{e.period}</span>

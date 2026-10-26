@@ -46,7 +46,7 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: site.title, template: `%s — ${person.firstName} ${person.lastName}` },
+  title: { default: site.title, template: `%s · ${person.firstName} ${person.lastName}` },
   description: site.description,
   applicationName: `${person.firstName} ${person.lastName}`,
   authors: [{ name: `${person.firstName} ${person.lastName}`, url: site.url }],

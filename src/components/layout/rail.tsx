@@ -44,7 +44,7 @@ export function Rail() {
       <div className="absolute inset-y-0 right-0 border-r border-line" />
       <div className="label absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 -rotate-90 items-center gap-6 whitespace-nowrap">
         <span>
-          SY-<span ref={idx}>01</span> / {pad(chapters.length)}
+          SY <span ref={idx}>01</span> / {pad(chapters.length)}
         </span>
         <span className="h-px w-10 bg-current opacity-50" />
         <span ref={name}>INDEX</span>

@@ -239,8 +239,8 @@ export function Hero() {
       <div className="relative flex h-full flex-col px-gutter pb-5 pt-[84px] md:pt-[100px] lg:pl-[calc(var(--gutter)+var(--rail))]">
         {/* Meta row — editorial running head */}
         <div data-hero-meta className="label grid grid-cols-4 items-end gap-x-4 overflow-hidden border-b border-line pb-3 md:grid-cols-12">
-          <span className="col-span-2 whitespace-nowrap md:col-span-1">SY-01 / {String(chapters.length).padStart(2, "0")}</span>
-          <span className="hidden truncate md:col-span-4 md:col-start-3 md:block">(Index) — Portfolio, Ed. ’26</span>
+          <span className="col-span-2 whitespace-nowrap md:col-span-1">SY 01 / {String(chapters.length).padStart(2, "0")}</span>
+          <span className="hidden truncate md:col-span-4 md:col-start-3 md:block">(Index) Portfolio, Ed. ’26</span>
           <span className="col-span-2 col-start-3 text-right md:col-span-3 md:col-start-7 md:text-left">Data / Interfaces</span>
           <span className="hidden text-right md:col-span-3 md:col-start-10 md:block">{person.coordinates}</span>
         </div>
@@ -282,7 +282,7 @@ export function Hero() {
               </div>
             </div>
             <p className="label absolute -left-2 top-[62%] hidden -translate-x-full text-right opacity-60 lg:block">
-              Fig. 01 — S. Yousaf, Lahore
+              Fig. 01 · S. Yousaf, Lahore
               <br />
               Move over the portrait ↘
             </p>
@@ -306,7 +306,7 @@ export function Hero() {
               <StatusDot /> {person.availabilityLabel}
             </span>
             <span>
-              Lahore, PK — <LocalTime seconds /> PKT
+              Lahore, PK · <LocalTime seconds /> PKT
             </span>
             <a
               href="#about"
@@ -331,7 +331,7 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-center gap-4 text-[var(--c-ink-fg)] opacity-0"
       >
-        <span className="label">SY-02 / {String(chapters.length).padStart(2, "0")} — About</span>
+        <span className="label">SY 02 / {String(chapters.length).padStart(2, "0")} · About</span>
         <span className="serif-i text-center text-[clamp(36px,6vw,110px)] leading-[0.95]">
           the person behind
           <br />

@@ -21,14 +21,14 @@ function Frame({ p, priority = false }: { p: Project; priority?: boolean }) {
           <i className="size-2 rounded-full bg-current opacity-30" />
           <i className="size-2 rounded-full bg-current opacity-30" />
         </span>
-        <span className="truncate opacity-70">{p.linkLabel ?? `${slug(p)} — local build`}</span>
+        <span className="truncate opacity-70">{p.linkLabel ?? `${slug(p)} · local build`}</span>
       </div>
       <div className="relative aspect-[16/10] overflow-hidden">
         {p.image ? (
           <Image
             data-shot
             src={p.image}
-            alt={`${p.name} — homepage screenshot`}
+            alt={`${p.name} homepage screenshot`}
             fill
             priority={priority}
             sizes="(min-width: 1024px) 52vw, 100vw"
@@ -243,14 +243,14 @@ export function Work() {
           {/* ── Intro panel: title + index */}
           <div data-panel className="flex shrink-0 flex-col lg:h-full lg:w-[min(48vw,820px)] lg:pb-[72px] lg:pr-[5vw] lg:pt-[100px]">
             <div className="label flex justify-between gap-4 border-b border-line pb-3">
-              <span>SY-04 / {pad(chapters.length)}</span>
+              <span>SY 04 / {pad(chapters.length)}</span>
               <span>(Selected work)</span>
             </div>
             <h2 id="work-title" data-velocity className="display mt-[5vh] text-[19vw] uppercase leading-[0.82] lg:text-[min(8.6vw,17svh)]">
               Selected <span className="serif-i normal-case text-accent">work</span>
             </h2>
             <p className="mt-6 max-w-[38ch] text-[15px] leading-relaxed opacity-70 md:text-[16px]">
-              {projects.length} sites, newest first — the latest built for a client and live this year. Hover a name to preview it.
+              {projects.length} sites, newest first. The latest was built for a client and went live this year. Hover a name to preview it.
             </p>
 
             <ol data-index className="mt-auto border-t border-line pt-2 max-lg:mt-10">

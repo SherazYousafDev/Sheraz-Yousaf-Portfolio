@@ -115,9 +115,9 @@ export function Experience() {
       {/* ── Header */}
       <div className="label grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:grid-cols-12">
         <span className="col-span-2 whitespace-nowrap">
-          SY-03 / {pad(chapters.length)}
+          SY 03 / {pad(chapters.length)}
         </span>
-        <span className="hidden md:col-span-3 md:col-start-3 md:block">(Experience) — the paper trail</span>
+        <span className="hidden md:col-span-3 md:col-start-3 md:block">(Experience) The paper trail</span>
         <span className="col-span-2 col-start-3 whitespace-nowrap text-right md:col-span-3 md:col-start-10">
           <span className="hidden sm:inline">{experience.length} roles · </span>
           {yearOf(experience.at(-1)!.period)} → now
@@ -132,7 +132,7 @@ export function Experience() {
           </RevealText>
         </div>
         <p className="col-span-4 mt-6 max-w-[34ch] text-[15px] leading-relaxed opacity-70 md:col-span-3 md:mt-0 md:pb-[1.2vw]">
-          Newest first. A data role now, frontend before it — the same habit of checking every detail twice.
+          Newest first. A data role now, frontend before it. Same habit: checking every detail twice.
         </p>
       </div>
 
@@ -199,7 +199,7 @@ export function Experience() {
                     </ul>
                   </div>
 
-                  <ul className="flex flex-col gap-3 md:col-span-5 lg:justify-center" aria-label={`${e.role} at ${e.company} — responsibilities`}>
+                  <ul className="flex flex-col gap-3 md:col-span-5 lg:justify-center" aria-label={`${e.role} at ${e.company}: responsibilities`}>
                     {e.points.map((p, j) => (
                       <li
                         key={j}

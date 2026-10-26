@@ -13,7 +13,7 @@ export function OpenBadge({ className }: { className?: string }) {
         e.preventDefault();
         scrollTo("#contact");
       }}
-      aria-label="Open to work — get in touch"
+      aria-label="Open to work, get in touch"
       className={`group grid aspect-square place-items-center rounded-full bg-[var(--c-paper-fg)] text-[var(--c-paper-bg)] ${className ?? ""}`}
     >
       <svg viewBox="0 0 100 100" aria-hidden className="col-start-1 row-start-1 size-full motion-safe:animate-[spin_14s_linear_infinite] group-hover:[animation-duration:4s]">

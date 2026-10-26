@@ -48,8 +48,8 @@ export function Stack() {
     >
       <div className="px-gutter lg:pl-[calc(var(--gutter)+var(--rail))]">
         <div className="label grid grid-cols-4 gap-x-4 border-b border-line pb-3 md:grid-cols-12">
-          <span className="col-span-2 whitespace-nowrap">SY-06 / {pad(chapters.length)}</span>
-          <span className="hidden md:col-span-3 md:col-start-3 md:block">(Stack) — tools of the trade</span>
+          <span className="col-span-2 whitespace-nowrap">SY 06 / {pad(chapters.length)}</span>
+          <span className="hidden md:col-span-3 md:col-start-3 md:block">(Stack) Tools of the trade</span>
           <span className="col-span-2 col-start-3 whitespace-nowrap text-right md:col-span-3 md:col-start-10">
             {total} entries<span className="hidden sm:inline"> · {skills.groups.length} groups</span>
           </span>
@@ -59,7 +59,7 @@ export function Stack() {
             The <span className="serif-i normal-case">toolkit</span>
           </h2>
           <p className="col-span-4 mt-6 max-w-[34ch] text-[15px] leading-relaxed md:col-span-4 md:mt-0 md:pb-[1vw]">
-            Spreadsheets and catalog systems by day, React and Tailwind from before — hover a row to slow it down.
+            Spreadsheets and catalog systems by day, React and Tailwind from before. Hover a row to slow it down.
           </p>
         </div>
       </div>
